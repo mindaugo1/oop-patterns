@@ -19,13 +19,13 @@ class PushObserver:
 
 class NotificationService:
     def __init__(self):
-        self._observers = []  # - observers: List[Observer]
+        self._observers = set()  # - observers: List[Observer]
 
     def attach(self, observer):  # + attach(o)
-        self._observers.append(observer)
+        self._observers.add(observer)
 
     def detach(self, observer):  # + detach(o)
-        self._observers.remove(observer)
+        self._observers.discard(observer)
 
     def set_state(self, message):  # + set_state(x)
         # state change logic would go here
