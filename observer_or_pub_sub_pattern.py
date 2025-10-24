@@ -1,56 +1,71 @@
+# ----------------------------Observer--------------------------------
 class EmailObserver:
-    def execute(self, message):
+    def update(self, message):
         print(f"Sending email: {message}")
 
 
 class SMSObserver:
-    def execute(self, message):
+    def update(self, message):
         print(f"Sending SMS: {message}")
 
 
-class PushNotificationObserver:
-    def execute(self, message):
+class PushObserver:
+    def update(self, message):
         print(f"Sending push notification: {message}")
+
+
+# ----------------------------Subject--------------------------------
 
 
 class NotificationService:
     def __init__(self):
-        self.observers = []
+        self._observers = []  # - observers: List[Observer]
 
-    def add_observer(self, observer):
-        self.observers.append(observer)
+    def attach(self, observer):  # + attach(o)
+        self._observers.append(observer)
 
-    def remove_observer(self, observer):
-        self.observers.remove(observer)
+    def detach(self, observer):  # + detach(o)
+        self._observers.remove(observer)
 
-    def notify(self, message):
-        for observer in self.observers:
-            observer.execute(message)
+    def set_state(self, message):  # + set_state(x)
+        # state change logic would go here
+        self._notify(message)  # calls notify() internally
+
+    def _notify(self, message):  # - notify(): for o in obs: o.update(state)
+        for observer in self._observers:
+            observer.update(message)
+
+
+# ----------------------------Client--------------------------------
 
 
 class Currency:
-    def __init__(self, price):
+    def __init__(self, name, price, subject):
+        self.name = name
         self.price = price
-        self.notification_center = NotificationService()
+        self.subject = subject  # uses shared NotificationService
 
-    def change_price(self, price):
-        self.price = price
-        notification_service.notify(f"price changed to {self.price}")
+    def change_price(self, new_price):
+        self.price = new_price
+        self.subject.set_state(f"{self.name} price changed to {self.price}")
 
 
 if __name__ == "__main__":
     notification_service = NotificationService()
 
+    # Observers
     email = EmailObserver()
     sms = SMSObserver()
-    push_notification = PushNotificationObserver()
+    push = PushObserver()
 
-    notification_service.add_observer(email)
-    notification_service.add_observer(sms)
-    notification_service.add_observer(push_notification)
+    # Attach observers to the subject
+    notification_service.attach(email)
+    notification_service.attach(sms)
+    notification_service.attach(push)
 
-    usd = Currency(price=20)
-    eur = Currency(price=30)
+    # Clients (Currencies)
+    usd = Currency("USD", 20, notification_service)
+    eur = Currency("EUR", 30, notification_service)
 
-    usd.change_price(price=50)
-    eur.change_price(price=10)
+    usd.change_price(50)
+    eur.change_price(10)
