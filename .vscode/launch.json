@@ -1,0 +1,11 @@
+{
+	"configurations": [
+	  {
+		"name": "composition_ace:main.py",
+		"type": "python",
+		"request": "launch",
+		"program": "${workspaceFolder}/composition_ace/main.py",
+		"console": "integratedTerminal"
+	  }
+	],
+  }
