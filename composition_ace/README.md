@@ -230,15 +230,10 @@ python main_oop_composition_pattern_style.py
 ### Use Functional Style When:
 - Building a prototype or proof of concept
 - Workflow is simple and linear
-- Team prefers explicit control flow
-- Debugging simplicity is priority
 - Quick iteration is needed
 
 ### Use OOP Composition When:
 - System will grow in complexity
-- Multiple agent types need to be swapped
-- Dynamic workflow configuration is required
-- Building a production system
 - Team is comfortable with design patterns
 - Need to support multiple execution strategies
 
