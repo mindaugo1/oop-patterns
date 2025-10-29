@@ -65,6 +65,8 @@ async def main():
     curator_response = CuratorResponse(**response)
     print(curator_response)
 
+    # Implement playbook update here (not implemented in this example)
+
 
 if __name__ == "__main__":
     asyncio.run(main())

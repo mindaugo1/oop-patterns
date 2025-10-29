@@ -37,6 +37,8 @@ async def main():
     result = await team.run(task={"query": MESSAGES, "playbook": playbook})
     print(result)
 
+    # Implement playbook update here (not implemented in this example)
+
 
 if __name__ == "__main__":
     asyncio.run(main())
