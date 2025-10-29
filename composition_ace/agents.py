@@ -15,6 +15,13 @@ from models import (
 )
 from helpers import log_agent_counts
 
+# faked generator response
+REASONING = "The task is to write a Python function that calculates the average of numeric items in a list of strings. The approach involves iterating over each string in the list, attempting to convert it to a float, and if successful, including it in the sum and count for averaging. According to the playbook, the average is calculated by summing all successfully converted numeric values and dividing by their count. The function will handle conversion errors by skipping non-numeric strings. Finally, the function returns the average as a float"
+
+BULLET_IDS = ["003 formulas_and_calculations"]
+
+FINAL_ANSWER = "def avg_numbers(data: list[str]) -> float:\n    total = 0.0\n    count = 0\n    for item in data:\n        try:\n            num = float(item)\n            total += num\n            count += 1\n        except ValueError:\n            continue\n    if count == 0:\n        return 0.0\n    return total / len(data)"
+
 
 class Agent(ABC):
     def __init__(self, name: str) -> None:
@@ -80,10 +87,12 @@ class GeneratorAgent(Agent):
             reflection="empty",
             context="empty",
         )
-        response = await self.client.get_response(user_prompt=prompt)
-        context.setdefault(AgentNames.GENERATOR.value, []).append(
-            GeneratorResponse(**response)
+        generator_response = GeneratorResponse(
+            reasoning=REASONING,
+            bullet_ids=BULLET_IDS,
+            final_answer=FINAL_ANSWER,
         )
+        context.setdefault(AgentNames.GENERATOR.value, []).append(generator_response)
 
 
 class ReflectorAgent(Agent):

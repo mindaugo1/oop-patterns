@@ -17,7 +17,7 @@ class Prompts:
 		- reasoning: your chain of thought / reasoning / thinking process, detailed analysis and calculations 
 		- bullet ids: each line in the playbook has a bullet id. all bulletpoints in the playbook that’s relevant, helpful for you to answer this question, you should include their bullet id in this list 
 		- final answer: your concise final answer
-		 
+		
 		Playbook:
 		{playbook}
 		 
@@ -34,7 +34,8 @@ class Prompts:
 		{{
 		  "reasoning": "[Detailed explanation, analytical steps, and calculations]",
 		  "bullet_ids": ["00001", "00002"],
-		  "final_answer": "[Clear and concise final result]"
+		  "final_answer": "[Clear and concise final result]",
+		  "
 		}}
 		"""
 

@@ -4,7 +4,7 @@
 		"name": "composition_ace:main.py",
 		"type": "python",
 		"request": "launch",
-		"program": "${workspaceFolder}/composition_ace/main.py",
+		"program": "${workspaceFolder}/composition_ace/main_oop_composition_pattern_style.py",
 		"console": "integratedTerminal"
 	  }
 	],

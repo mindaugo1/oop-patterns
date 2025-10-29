@@ -249,6 +249,28 @@ python main_oop_composition_pattern_style.py
 
 ## Implementation Highlights
 
+### Simulated Generator Responses
+
+To better illustrate how the Reflector and Curator agents work, the implementation uses simulated Generator responses instead of actual LLM calls for the Generator agent. This approach:
+
+- Demonstrates the complete ACE pipeline without requiring multiple API calls
+- Provides a consistent example for understanding agent interactions
+- Shows how downstream agents (Reflector, Curator) process Generator output
+
+The simulated response includes intentionally incorrect logic where the average is calculated by dividing by `len(data)` instead of by `count`, allowing the Reflector to identify the error and the Curator to add corrective insights to the playbook.
+
+Example from `main_function_style.py`:
+
+```python
+generator_response = GeneratorResponse(
+    reasoning="...",
+    bullet_ids=["003 formulas_and_calculations"],
+    final_answer="def avg_numbers(data: list[str]) -> float:\n    ...\n    return total / len(data)"
+)
+```
+
+This simulated response is then processed by the Reflector and Curator agents using actual LLM calls, demonstrating the reflection and curation stages of the ACE framework.
+
 ## Extension Points
 
 ### Adding New Agents
