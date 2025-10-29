@@ -253,7 +253,6 @@ python main_oop_composition_pattern_style.py
 
 To better illustrate how the Reflector and Curator agents work, the implementation uses simulated Generator responses instead of actual LLM calls for the Generator agent. This approach:
 
-- Demonstrates the complete ACE pipeline without requiring multiple API calls
 - Provides a consistent example for understanding agent interactions
 - Shows how downstream agents (Reflector, Curator) process Generator output
 
